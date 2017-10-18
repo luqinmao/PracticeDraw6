@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.hencoder.hencoderpracticedraw6.R;
+import com.hencoder.hencoderpracticedraw6.Utils;
 
 public class Practice05MultiProperties extends ConstraintLayout {
     Button animateBt;
     ImageView imageView;
+    private int translationState = 0;
 
     public Practice05MultiProperties(Context context) {
         super(context);
@@ -39,6 +41,32 @@ public class Practice05MultiProperties extends ConstraintLayout {
             @Override
             public void onClick(View v) {
                 // TODO 在这里处理点击事件，同时对多个属性做动画
+
+                switch (translationState){
+                    case 0:
+                        imageView.animate()
+                                .translationX(Utils.dpToPixel(200))
+                                .alpha(1f)
+                                .rotation(360)
+                                .scaleY(1)
+                                .scaleX(1)
+                                .setDuration(500);
+                        break;
+                    case 1:
+                        imageView.animate()
+                                .translationX(Utils.dpToPixel(0))
+                                .alpha(0f)
+                                .rotation(0)
+                                .scaleY(0)
+                                .scaleX(0)
+                                .setDuration(500);
+
+                        break;
+                }
+                translationState ++;
+                if (translationState == 2){
+                    translationState = 0;
+                }
             }
         });
     }
